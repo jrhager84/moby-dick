@@ -12,6 +12,10 @@
   align-items: center;
 }
 
+.file-drop input {
+  display: hidden;
+}
+
 .footer {
   display: flex;
   flex: 1;
