@@ -90,7 +90,7 @@ const ResultsTable = ({items, limit = items.length < 100 ? items.length : 100, t
     <div className='slim'>
       <div className={styles.topLine}>
       {!!totalWords && <p data-cy="num-results">Total Words: {totalWords}</p>}
-      <p>Top {topSize} words</p>
+      <p data-cy="top-num-title">Top {topSize} words</p>
       </div>
       {results && (
         <div>

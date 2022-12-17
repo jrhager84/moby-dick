@@ -66,9 +66,15 @@ describe("Home page and input testing", () => {
   })
 
   it("Should update the top N posts when a new number is input", () => {
-    cy.get("[data-cy=top-num-changer]").click().type("4")
+    cy.get("[data-cy=top-num-changer]").focus().type("{backspace}4")
     cy.get("[data-cy=top-num-submit]").click()
-    cy.get("[data-cy=num-results]").should("contain.text", "4").submit()
+    cy.get("[data-cy=top-num-title]").should("contain.text", "4").wait(2000)
+  })
+
+  it("Should upper bound to size of the list (unique items: not total)", () => {
+    cy.get("[data-cy=top-num-changer]").focus().type("{backspace}100")
+    cy.get("[data-cy=top-num-submit]").click()
+    cy.get("[data-cy=top-num-title]").should("contain.text", "6").wait(2000)
   })
 
   it("Should reset the form data and the table when clicked", () => {
