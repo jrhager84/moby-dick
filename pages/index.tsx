@@ -51,8 +51,8 @@ const Home = () => {
       console.log('processed text: ', processedText)
   
       // Set results and clear flags
-      totalWords.current = processedText.totalWords
-      setResults(processedText.sortedArray)
+      totalWords.current = processedText.totalWords ?? null
+      setResults(processedText.sortedArray ?? [])
     } catch(e) {
       console.error('Error processing words')
     } finally {
