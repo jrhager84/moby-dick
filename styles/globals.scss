@@ -1,0 +1,102 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  min-width: 250px;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Global table styling */
+
+table {
+  border: 1px solid lightgray;
+  width: 100%;
+  max-width: 600px;
+}
+
+tbody {
+  border-bottom: 1px solid lightgray;
+}
+
+th {
+  border-bottom: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  padding: 2px 4px;
+}
+
+td {
+  border-bottom: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+}
+
+tfoot {
+  color: gray;
+}
+
+tfoot th {
+  font-weight: normal;
+}
+
+.can-sort {
+  cursor: pointer;
+  user-select: none;
+}
+
+.table-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  max-width: 600px;
+
+  & button {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+}
+
+/* Custom Classes */
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.medium {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.slim {
+  max-width: 600px;
+  margin: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: #333;
+    background: white;
+  }
+}
