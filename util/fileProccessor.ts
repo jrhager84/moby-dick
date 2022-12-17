@@ -77,8 +77,13 @@ export const processTextDocument = async (words: Map<string, number>, inputFile:
 }
 
 // Abstracted in case other function/component may use it
-export const convertMapToArray = (words: Map<string, number>): [string, number][] => {
+export const convertMapToArray = (words: Map<string, number>): [string, number][] | null => {
   // Convert hash/set to array, filter out stop words, sort by occurence
-  const arr = Array.from(words.entries()).filter(([_, value]) => value > 0).sort(([aKey, aValue], [bKey, bValue]) => bValue - aValue)
-  return arr
+  try {
+    const arr = Array.from(words.entries()).filter(([_, value]) => value > 0).sort(([aKey, aValue], [bKey, bValue]) => bValue - aValue)
+    return arr
+  } catch(e) {
+    console.log('Error with conversion')
+    return null
+  }
 }
