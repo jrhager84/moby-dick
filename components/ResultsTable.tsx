@@ -96,9 +96,9 @@ const ResultsTable = ({items, limit = items.length < 100 ? items.length : 100, t
         <div>
           <table data-cy="results-table">
             <thead>
-              {table.getHeaderGroups().map(headerGroup => (
+              {!!table.getHeaderGroups() && table?.getHeaderGroups()?.map(headerGroup => (
                 <tr key={headerGroup.id}>
-                  {headerGroup.headers.map(header => {
+                  {headerGroup?.headers?.map(header => {
                     return (
                       <th key={header.id} colSpan={header.colSpan}>
                         {header.isPlaceholder ? null : (
