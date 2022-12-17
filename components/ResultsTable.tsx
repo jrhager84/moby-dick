@@ -69,7 +69,7 @@ const ResultsTable = ({items, limit = items.length < 100 ? items.length : 100, t
 
   // Table
   const table = useReactTable({
-    data: results,
+    data: results ?? [],
     columns,
     onSortingChange: setSorting,
     state: {
@@ -96,7 +96,7 @@ const ResultsTable = ({items, limit = items.length < 100 ? items.length : 100, t
         <div>
           <table data-cy="results-table">
             <thead>
-              {!!table.getHeaderGroups() && table?.getHeaderGroups()?.map(headerGroup => (
+              {!!table && table?.getHeaderGroups()?.map(headerGroup => (
                 <tr key={headerGroup.id}>
                   {headerGroup?.headers?.map(header => {
                     return (
@@ -129,10 +129,10 @@ const ResultsTable = ({items, limit = items.length < 100 ? items.length : 100, t
               {table
                 .getRowModel()
                 .rows.slice(0, rowsPerPage)
-                .map((row, idx) => {
+                ?.map((row, idx) => {
                   return (
                     <tr key={row.id} className={idx % 2 === 0 ? 'left-content' : 'right-content'}>
-                      {row.getVisibleCells().map(cell => {
+                      {row.getVisibleCells()?.map(cell => {
                         return (
                           <td key={cell.id}>
                             {flexRender(
