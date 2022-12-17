@@ -3,6 +3,13 @@
 Requirement: To count all occurences of word in text file (Moby Dick) that *aren't* in the stop word list (if provided)
 Instructions on how to test are below:
 
+## Testing
+### Cypress:
+Type ```yarn cypress``` to start Cypress e2e testing
+
+### Jest
+Type ```yarn test``` to run start Jest testing
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
