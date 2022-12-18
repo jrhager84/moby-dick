@@ -1,3 +1,5 @@
+"use client" // Use client directive for client components new in NextJS 13
+
 import React, { useEffect, useMemo, useState } from 'react'
 import {
   ColumnDef,
