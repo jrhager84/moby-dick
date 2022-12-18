@@ -19,7 +19,7 @@ const ResultsTable = ({items, limit = items.length < 100 ? items.length : 100, t
   // State
   const [rowsPerPage, setRowsPerPage] = useState<number>(20)
   const [sorting, setSorting] = useState<SortingState>([])
-  const [topSize, setTopSize] = useState(limit > items.length ? items.length : limit)
+  const [topSize, setTopSize] = useState<number>(limit > items.length ? items.length : limit)
   const [results, setResults] = useState<Row[]>(items.slice(0, topSize <= items.length ? topSize : items.length - 1))
   const [topSizeInput, setTopSizeInput] = useState<number>(limit > items.length ? items.length : limit ?? 0)
 
@@ -38,15 +38,13 @@ const ResultsTable = ({items, limit = items.length < 100 ? items.length : 100, t
     // If it's too high or low
     if (topSizeInput > items.length) {
       setTopSizeInput(items.length)
-      setTopSize(items.length)
+      setTopSize(Number(items.length))
       return
     }
     if (topSizeInput <= 0) {
       setTopSize(1)
       setTopSizeInput(1)
     }
-
-    console.log('not too high or low')
 
     setTopSizeInput(topSizeInput)
     setTopSize(topSizeInput)
@@ -65,11 +63,11 @@ const ResultsTable = ({items, limit = items.length < 100 ? items.length : 100, t
           cell: info => info.getValue(),
           header: () => 'Occurence'
         }
-  ], [items])
+  ], [])
 
   // Table
   const table = useReactTable({
-    data: results ?? [],
+    data: results || [],
     columns,
     onSortingChange: setSorting,
     state: {
@@ -183,9 +181,9 @@ const ResultsTable = ({items, limit = items.length < 100 ? items.length : 100, t
             <div className="flex-row space-between" style={{marginTop: '3rem'}}>
               <div className="flex-column">
                 <label>Num. of words to show:</label>
-                <input data-cy="top-num-changer" placeholder={topSize} onChange={handleTopSize} value={topSizeInput ?? ''} />
+                <input data-cy="top-num-changer" placeholder={String(topSize)} onChange={handleTopSize} value={topSizeInput || ''} />
               </div>
-              <button data-cy="top-num-submit" style={{justifySelf: 'flex-end'}} onClick={() => setTopSize(handleTopSizeSubmit)}>Change</button>
+              <button data-cy="top-num-submit" style={{justifySelf: 'flex-end'}} onClick={handleTopSizeSubmit}>Change</button>
             </div>
         </div>
         )}

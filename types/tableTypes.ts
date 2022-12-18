@@ -4,7 +4,7 @@ export type Row = [
 ]
 
 export type Table = {
-  items: any
+  items: Row[]
   limit: number
   totalWords?: number | null
 }

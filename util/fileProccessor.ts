@@ -62,7 +62,7 @@ export const processTextDocument = async (words: Map<string, number>, inputFile:
         })
         
         resolve({
-          sortedArray: convertMapToArray(words),
+          sortedArray: convertMapToArray(words) || [],
           totalWords: totalWords ?? null
         })
       }

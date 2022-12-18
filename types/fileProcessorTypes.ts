@@ -1,4 +1,4 @@
 export type ProcessedTextFile = {
-  sortedArray: [string, number][] | null | undefined
+  sortedArray: [string, number][]
   totalWords: number | null | undefined
 }

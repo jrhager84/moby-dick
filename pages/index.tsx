@@ -48,11 +48,11 @@ const Home = () => {
     try {
       if (!!stopWords) words = await processStopWords(words, stopWords)
       const processedText = await processTextDocument(words, inputFile)
-      console.log('processed text: ', processedText)
+      console.log('processed text: ', Array.isArray(processedText.sortedArray))
   
       // Set results and clear flags
       totalWords.current = processedText.totalWords ?? null
-      setResults(processedText?.sortedArray || [])
+      if (Array.isArray(processedText.sortedArray)) setResults(processedText?.sortedArray || [])
     } catch(e) {
       console.error('Error processing words')
     } finally {
@@ -106,7 +106,7 @@ const Home = () => {
             Loading... This may take up to 10 seconds...
           </div>
         }
-        {!!results.length && <ResultsTable items={results || []} limit={topSize} totalWords={totalWords.current}/> }
+        {results.length > 0 && <ResultsTable items={results || []} limit={topSize} totalWords={totalWords.current}/> }
       </div>
     </div>
   )
