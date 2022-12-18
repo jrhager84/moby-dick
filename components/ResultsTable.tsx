@@ -17,10 +17,10 @@ import { Row, Table } from '../types/tableTypes'
 
 const ResultsTable = ({items, limit = items.length < 100 ? items.length : 100, totalWords}: Table) => {
   // State
-  const [results, setResults] = useState<Row[]>([])
   const [rowsPerPage, setRowsPerPage] = useState<number>(20)
   const [sorting, setSorting] = useState<SortingState>([])
   const [topSize, setTopSize] = useState(limit > items.length ? items.length : limit)
+  const [results, setResults] = useState<Row[]>(items.slice(0, topSize <= items.length ? topSize : items.length - 1))
   const [topSizeInput, setTopSizeInput] = useState<number>(limit > items.length ? items.length : limit ?? 0)
 
   // Regex matcher
@@ -65,7 +65,7 @@ const ResultsTable = ({items, limit = items.length < 100 ? items.length : 100, t
           cell: info => info.getValue(),
           header: () => 'Occurence'
         }
-  ], [])
+  ], [items])
 
   // Table
   const table = useReactTable({
@@ -96,12 +96,12 @@ const ResultsTable = ({items, limit = items.length < 100 ? items.length : 100, t
         <div>
           <table data-cy="results-table">
             <thead>
-              {!!table && table?.getHeaderGroups()?.map(headerGroup => (
+              {!!table?.getHeaderGroups() && (table?.getHeaderGroups() || [])?.map(headerGroup => (
                 <tr key={headerGroup.id}>
-                  {headerGroup?.headers?.map(header => {
+                  {(headerGroup?.headers || [])?.map(header => {
                     return (
-                      <th key={header.id} colSpan={header.colSpan}>
-                        {header.isPlaceholder ? null : (
+                      <th key={header?.id} colSpan={header.colSpan}>
+                        {header?.isPlaceholder ? null : (
                           <div
                           { ...{
                             className: header.column.getCanSort() ? 'can-sort' : '',
@@ -110,12 +110,12 @@ const ResultsTable = ({items, limit = items.length < 100 ? items.length : 100, t
                           >
                             {flexRender(
                               header.column.columnDef.header,
-                              header.getContext(),
+                              header?.getContext(),
                             )},
                             {{
                               asc: ' 🔼',
                               desc: ' 🔽',
-                              }[header.column.getIsSorted() as string] ?? null
+                              }[header?.column?.getIsSorted() as string] ?? null
                             }
                           </div>
                         )}
@@ -126,13 +126,13 @@ const ResultsTable = ({items, limit = items.length < 100 ? items.length : 100, t
               ))}
             </thead>
             <tbody>
-              {table
+              {(table
                 .getRowModel()
-                .rows.slice(0, rowsPerPage)
+                ?.rows?.slice(0, rowsPerPage) || [])
                 ?.map((row, idx) => {
                   return (
                     <tr key={row.id} className={idx % 2 === 0 ? 'left-content' : 'right-content'}>
-                      {row.getVisibleCells()?.map(cell => {
+                      {(row?.getVisibleCells() || [])?.map(cell => {
                         return (
                           <td key={cell.id}>
                             {flexRender(
@@ -168,14 +168,14 @@ const ResultsTable = ({items, limit = items.length < 100 ? items.length : 100, t
               <button
                 className="border rounded p-1"
                 onClick={() => table.nextPage()}
-                disabled={!table.getCanNextPage()}
+                disabled={!table?.getCanNextPage()}
               >
                 {'>'}
               </button>
               <button
                 className="border rounded p-1"
                 onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-                disabled={!table.getCanNextPage()}
+                disabled={!table?.getCanNextPage()}
               >
                 {'>>'}
               </button>
