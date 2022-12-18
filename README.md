@@ -3,8 +3,16 @@
 Requirement: To count all occurences of word in text file (Moby Dick) that *aren't* in the stop word list (if provided)
 Instructions on how to test are below:
 
-## StackBlitz
-If you would like to test this project *without* having to pull and build, you can visit this link:
+## Viewing project
+
+### AWS Amplify
+https://moby-dick.pages.dev/
+
+### CloudFlare Pages
+https://main.d3ti7mxaroyfzh.amplifyapp.com/
+
+### StackBlitz
+If you would like to review/test this project *without* having to pull and build, you can visit this link:
 https://stackblitz.com/edit/nextjs-pf2fbn?file=README.md
 
 ## Testing
