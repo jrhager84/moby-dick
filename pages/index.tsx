@@ -52,7 +52,7 @@ const Home = () => {
   
       // Set results and clear flags
       totalWords.current = processedText.totalWords ?? null
-      setResults(processedText.sortedArray ?? [])
+      setResults(processedText?.sortedArray || [])
     } catch(e) {
       console.error('Error processing words')
     } finally {
@@ -106,7 +106,7 @@ const Home = () => {
             Loading... This may take up to 10 seconds...
           </div>
         }
-        {!!results.length && <ResultsTable items={results} limit={topSize} totalWords={totalWords.current}/> }
+        {!!results.length && <ResultsTable items={results || []} limit={topSize} totalWords={totalWords.current}/> }
       </div>
     </div>
   )
